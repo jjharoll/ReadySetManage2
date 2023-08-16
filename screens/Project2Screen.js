@@ -47,19 +47,41 @@ const Project2Screen = props => {
           return;
         }
         const result_project = (
-          await SupaBase2Api.pruebasProjectsGET(Constants)
+          await SupaBase2Api.manyprojecstGET(Constants, {})
         )?.json;
         console.log(result_project, 'reult project');
         const id = Getprojectid(result_project);
         console.log(id);
+        setGlobalVariableValue({
+          key: 'project_name',
+          value: '',
+        });
+        const projectname = result_project?.projectname;
+        const projectdate = result_project?.projectdate;
+        const startdateest = result_project?.startdateest;
+        const requireddate = result_project?.requireddate;
+        setGlobalVariableValue({
+          key: 'project_name',
+          value: projectname,
+        });
+        setGlobalVariableValue({
+          key: 'start_date',
+          value: projectdate,
+        });
+        setGlobalVariableValue({
+          key: 'required_date',
+          value: requireddate,
+        });
       } catch (err) {
         console.error(err);
       }
     };
     handler();
   }, [isFocused]);
+  const [modalBOM, setModalBOM] = React.useState(false);
   const [options, setOptions] = React.useState(false);
   const [textAreaValue, setTextAreaValue] = React.useState('');
+  const [valorBOM, setValorBOM] = React.useState('');
 
   return (
     <ScreenContainer hasSafeArea={true} scrollable={false}>
@@ -147,7 +169,7 @@ const Project2Screen = props => {
         showsVerticalScrollIndicator={true}
       >
         {/* Cart Items */}
-        <SupaBase2Api.FetchManyprojecstGET>
+        <SupaBase2Api.FetchManyprojecstGET tnt={80}>
           {({ loading, error, data, refetchManyprojecst }) => {
             const cartItemsData = data?.json;
             if (loading) {
@@ -166,7 +188,43 @@ const Project2Screen = props => {
                     <Touchable
                       onPress={() => {
                         try {
+                          setGlobalVariableValue({
+                            key: 'project_name',
+                            value: flashListData?.projectname,
+                          });
                           navigation.navigate('ProjectInfo3Screen');
+                          setGlobalVariableValue({
+                            key: 'project_date',
+                            value: flashListData?.projectdate,
+                          });
+                          setGlobalVariableValue({
+                            key: 'start_date',
+                            value: flashListData?.createdat,
+                          });
+                          setGlobalVariableValue({
+                            key: 'required_date',
+                            value: flashListData?.requireddate,
+                          });
+                          setGlobalVariableValue({
+                            key: 'balance',
+                            value: flashListData?.totalprojectprice,
+                          });
+                          setGlobalVariableValue({
+                            key: 'pay_user',
+                            value: flashListData?.totalprojectpayment,
+                          });
+                          setGlobalVariableValue({
+                            key: 'phone',
+                            value: flashListData?.contacttel,
+                          });
+                          setGlobalVariableValue({
+                            key: 'cellphone',
+                            value: flashListData?.contactmobilphone,
+                          });
+                          setGlobalVariableValue({
+                            key: 'address',
+                            value: flashListData?.address,
+                          });
                         } catch (err) {
                           console.error(err);
                         }

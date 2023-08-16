@@ -11,6 +11,46 @@ import { handleResponse, isOkStatus } from '../utils/handleRestApiResponse';
 import usePrevious from '../utils/usePrevious';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 
+export const actualizarProyectoPATCH = (Constants, { tnt }, handlers = {}) =>
+  fetch(
+    `https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/project?projectname=eq.${
+      tnt ?? ''
+    }`,
+    {
+      body: JSON.stringify({ projectname: 'editar proyecto' }),
+      headers: {
+        Accept: 'application/json',
+        Authorization: Constants['token'],
+        'Content-Type': 'application/json',
+        apikey: Constants['Api_Key_Header'],
+      },
+      method: 'PATCH',
+    }
+  ).then(res => handleResponse(res, handlers));
+
+export const useActualizarProyectoPATCH = (
+  initialArgs = {},
+  { handlers = {} } = {}
+) => {
+  const queryClient = useQueryClient();
+  const Constants = GlobalVariables.useValues();
+  return useMutation(
+    args =>
+      actualizarProyectoPATCH(Constants, { ...initialArgs, ...args }, handlers),
+    {
+      onError: (err, variables, { previousValue }) => {
+        if (previousValue) {
+          return queryClient.setQueryData('projects', previousValue);
+        }
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries('project');
+        queryClient.invalidateQueries('projects');
+      },
+    }
+  );
+};
+
 export const areasGET = (Constants, _args, handlers = {}) =>
   fetch(`https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/area`, {
     headers: {
@@ -414,26 +454,33 @@ export const FetchManycityGET = ({
   return children({ loading, data, error, refetchManycity: refetch });
 };
 
-export const manyprojecstGET = (Constants, _args, handlers = {}) =>
-  fetch(`https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/project?select=*`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: Constants['token'],
-      'Content-Type': 'application/json',
-      apikey: Constants['Api_Key_Header'],
-    },
-  }).then(res => handleResponse(res, handlers));
+export const manyprojecstGET = (Constants, { tnt }, handlers = {}) =>
+  fetch(
+    `https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/project?select=*&tntenantid=eq.${
+      tnt ?? ''
+    }`,
+    {
+      headers: {
+        Accept: 'application/json',
+        Authorization: Constants['token'],
+        'Content-Type': 'application/json',
+        apikey: Constants['Api_Key_Header'],
+      },
+    }
+  ).then(res => handleResponse(res, handlers));
 
 export const useManyprojecstGET = (
   args = {},
   { refetchInterval, handlers = {} } = {}
 ) => {
   const Constants = GlobalVariables.useValues();
+  const queryClient = useQueryClient();
   return useQuery(
-    ['projects', args],
+    ['project', args],
     () => manyprojecstGET(Constants, args, handlers),
     {
       refetchInterval,
+      onSuccess: () => queryClient.invalidateQueries(['projects']),
     }
   );
 };
@@ -443,6 +490,7 @@ export const FetchManyprojecstGET = ({
   onData = () => {},
   handlers = {},
   refetchInterval,
+  tnt,
 }) => {
   const Constants = GlobalVariables.useValues();
   const isFocused = useIsFocused();
@@ -454,7 +502,7 @@ export const FetchManyprojecstGET = ({
     error,
     refetch,
   } = useManyprojecstGET(
-    {},
+    { tnt },
     { refetchInterval, handlers: { onData, ...handlers } }
   );
 
@@ -1269,6 +1317,68 @@ export const FetchProjecst3GET = ({
   return children({ loading, data, error, refetchProjecst3: refetch });
 };
 
+export const projectareabomGET = (Constants, _args, handlers = {}) =>
+  fetch(
+    `https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/projectareabom?select=*`,
+    {
+      headers: {
+        Accept: 'application/json',
+        Authorization: Constants['token'],
+        'Content-Type': 'application/json',
+        apikey: Constants['Api_Key_Header'],
+      },
+    }
+  ).then(res => handleResponse(res, handlers));
+
+export const useProjectareabomGET = (
+  args = {},
+  { refetchInterval, handlers = {} } = {}
+) => {
+  const Constants = GlobalVariables.useValues();
+  return useQuery(
+    ['looperPRojects', args],
+    () => projectareabomGET(Constants, args, handlers),
+    {
+      refetchInterval,
+    }
+  );
+};
+
+export const FetchProjectareabomGET = ({
+  children,
+  onData = () => {},
+  handlers = {},
+  refetchInterval,
+}) => {
+  const Constants = GlobalVariables.useValues();
+  const isFocused = useIsFocused();
+  const prevIsFocused = usePrevious(isFocused);
+
+  const {
+    isLoading: loading,
+    data,
+    error,
+    refetch,
+  } = useProjectareabomGET(
+    {},
+    { refetchInterval, handlers: { onData, ...handlers } }
+  );
+
+  React.useEffect(() => {
+    if (!prevIsFocused && isFocused) {
+      refetch();
+    }
+  }, [isFocused, prevIsFocused]);
+
+  React.useEffect(() => {
+    if (error) {
+      console.error('Fetch error: ' + error.status + ' ' + error.statusText);
+      console.error(error);
+    }
+  }, [error]);
+  return children({ loading, data, error, refetchProjectareabom: refetch });
+};
+
 export const pruebasContacts2GET = (Constants, _args, handlers = {}) =>
   fetch(`https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/contact`, {
     headers: {
@@ -1327,6 +1437,68 @@ export const FetchPruebasContacts2GET = ({
     }
   }, [error]);
   return children({ loading, data, error, refetchPruebasContacts2: refetch });
+};
+
+export const pruebasJobTypeGET = (Constants, _args, handlers = {}) =>
+  fetch(
+    `https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/collection?collectionfield=eq.jobtype&select=*&tntenantid=eq.80`,
+    {
+      headers: {
+        Accept: 'application/json',
+        Authorization: Constants['token'],
+        'Content-Type': 'application/json',
+        apikey: Constants['Api_Key_Header'],
+      },
+    }
+  ).then(res => handleResponse(res, handlers));
+
+export const usePruebasJobTypeGET = (
+  args = {},
+  { refetchInterval, handlers = {} } = {}
+) => {
+  const Constants = GlobalVariables.useValues();
+  return useQuery(
+    ['JobTypes', args],
+    () => pruebasJobTypeGET(Constants, args, handlers),
+    {
+      refetchInterval,
+    }
+  );
+};
+
+export const FetchPruebasJobTypeGET = ({
+  children,
+  onData = () => {},
+  handlers = {},
+  refetchInterval,
+}) => {
+  const Constants = GlobalVariables.useValues();
+  const isFocused = useIsFocused();
+  const prevIsFocused = usePrevious(isFocused);
+
+  const {
+    isLoading: loading,
+    data,
+    error,
+    refetch,
+  } = usePruebasJobTypeGET(
+    {},
+    { refetchInterval, handlers: { onData, ...handlers } }
+  );
+
+  React.useEffect(() => {
+    if (!prevIsFocused && isFocused) {
+      refetch();
+    }
+  }, [isFocused, prevIsFocused]);
+
+  React.useEffect(() => {
+    if (error) {
+      console.error('Fetch error: ' + error.status + ' ' + error.statusText);
+      console.error(error);
+    }
+  }, [error]);
+  return children({ loading, data, error, refetchPruebasJobType: refetch });
 };
 
 export const pruebasProjectsGET = (Constants, _args, handlers = {}) =>
@@ -1449,26 +1621,33 @@ export const FetchPruebasQuotesGET = ({
   return children({ loading, data, error, refetchPruebasQuotes: refetch });
 };
 
-export const servicesGET = (Constants, _args, handlers = {}) =>
-  fetch(`https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/service?select=*`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: Constants['token'],
-      'Content-Type': 'application/json',
-      apikey: Constants['Api_Key_Header'],
-    },
-  }).then(res => handleResponse(res, handlers));
+export const servicesGET = (Constants, { tnt }, handlers = {}) =>
+  fetch(
+    `https://maeaicbvtsdmzhtwhmmz.supabase.co/rest/v1/service?select=*&tntenantid=eq.${
+      tnt ?? ''
+    }`,
+    {
+      headers: {
+        Accept: 'application/json',
+        Authorization: Constants['token'],
+        'Content-Type': 'application/json',
+        apikey: Constants['Api_Key_Header'],
+      },
+    }
+  ).then(res => handleResponse(res, handlers));
 
 export const useServicesGET = (
   args = {},
   { refetchInterval, handlers = {} } = {}
 ) => {
   const Constants = GlobalVariables.useValues();
+  const queryClient = useQueryClient();
   return useQuery(
-    ['services', args],
+    ['service', args],
     () => servicesGET(Constants, args, handlers),
     {
       refetchInterval,
+      onSuccess: () => queryClient.invalidateQueries(['services']),
     }
   );
 };
@@ -1478,6 +1657,7 @@ export const FetchServicesGET = ({
   onData = () => {},
   handlers = {},
   refetchInterval,
+  tnt,
 }) => {
   const Constants = GlobalVariables.useValues();
   const isFocused = useIsFocused();
@@ -1489,7 +1669,7 @@ export const FetchServicesGET = ({
     error,
     refetch,
   } = useServicesGET(
-    {},
+    { tnt },
     { refetchInterval, handlers: { onData, ...handlers } }
   );
 

@@ -22,40 +22,21 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.draftbit.untitledapp",
-      "supportsTablet": null,
+      "bundleIdentifier": "com.rsm.apprsm",
       "buildNumber": "1.0.0",
       "infoPlist": {},
       "usesIcloudStorage": false
     },
     "android": {
       "versionCode": 1,
-      "package": "com.draftbit.untitledapp",
+      "package": "com.rsm.apprsm",
       "permissions": [],
-      "adaptiveIcon": {
-        "foregroundImage": null,
-        "monochromeImage": null,
-        "backgroundColor": null
-      }
+      "adaptiveIcon": {}
     },
-    "androidStatusBar": {
-      "hidden": null,
-      "barStyle": null,
-      "translucent": null,
-      "backgroundColor": null
-    },
-    "androidNavigationBar": {
-      "visible": null,
-      "barStyle": null,
-      "backgroundColor": null
-    },
+    "androidStatusBar": {},
+    "androidNavigationBar": {},
     "web": {
-      "display": null,
-      "barStyle": null,
-      "themeColor": "#000000",
-      "orientation": null,
-      "backgroundColor": null,
-      "preferRelatedApplications": null
+      "themeColor": "#000000"
     },
     "notification": {
       "androidMode": "default"

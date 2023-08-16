@@ -11,6 +11,72 @@ export const ButtonStyles = theme =>
       fontWeight: '700',
       textAlign: 'center',
     },
+    boton: {
+      backgroundColor: theme.colors['Strong'],
+      borderRadius: 12,
+      color: theme.colors['#ffd20d'],
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 16,
+      height: 51,
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign: 'center',
+    },
+    'boton 2': {
+      backgroundColor: theme.colors['Strong'],
+      borderRadius: 12,
+      color: theme.colors['#ffd20d'],
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 16,
+      height: 51,
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign: 'center',
+    },
+    'boton 3': {
+      backgroundColor: theme.colors['Strong'],
+      borderRadius: 12,
+      color: theme.colors['#ffd20d'],
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 16,
+      height: 51,
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign: 'center',
+    },
+    'boton 4': {
+      backgroundColor: theme.colors['Strong'],
+      borderRadius: 12,
+      color: theme.colors['#ffd20d'],
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 16,
+      height: 51,
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign: 'center',
+    },
+    'boton 5': {
+      backgroundColor: theme.colors['Strong'],
+      borderRadius: 12,
+      color: theme.colors['#ffd20d'],
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 16,
+      height: 51,
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign: 'center',
+    },
+    'boton 6': {
+      backgroundColor: theme.colors['Strong'],
+      borderRadius: 12,
+      color: theme.colors['#ffd20d'],
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 16,
+      height: 51,
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign: 'center',
+    },
   });
 
 export const ViewStyles = theme =>
@@ -101,6 +167,7 @@ export const ViewStyles = theme =>
     },
     campoinut: { paddingBottom: 16, paddingTop: 16 },
     'campoinut 2': { paddingBottom: 16, paddingTop: 16 },
+    contentHOME: { flex: 1 },
     fechas: {
       alignItems: 'center',
       flexDirection: 'row',
@@ -138,6 +205,12 @@ export const ViewStyles = theme =>
       paddingRight: 20,
     },
     mapas: { paddingLeft: 16, paddingRight: 16 },
+    modalesProject: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingLeft: 10,
+    },
     notasNewQuotes: { paddingBottom: 16, paddingTop: 16 },
     'notasNewQuotes 2': { paddingBottom: 16, paddingTop: 16 },
     notes: { paddingBottom: 16, paddingTop: 16 },
@@ -181,6 +254,19 @@ export const ViewStyles = theme =>
 
 export const CheckboxRowStyles = theme =>
   StyleSheet.create({ 'Checkbox Row': { minHeight: 50 } });
+
+export const SurfaceStyles = theme =>
+  StyleSheet.create({
+    Drawer: {
+      backgroundColor: theme.colors.surface,
+      flex: 2,
+      height: '100%',
+      position: 'absolute',
+      top: 0,
+      width: '80%',
+      zIndex: 5,
+    },
+  });
 
 export const ImageStyles = theme =>
   StyleSheet.create({

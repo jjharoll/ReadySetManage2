@@ -11,26 +11,26 @@ import { handleResponse, isOkStatus } from '../utils/handleRestApiResponse';
 import usePrevious from '../utils/usePrevious';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 
-export const exampleData10GET = (Constants, _args, handlers = {}) =>
-  fetch(`https://example-data.draftbit.com/activists?_limit=10`, {
+export const $todoLists$Limit$10GET = (Constants, _args, handlers = {}) =>
+  fetch(`https://example-data.draftbit.com/todo_lists?_limit=10`, {
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
   }).then(res => handleResponse(res, handlers));
 
-export const useExampleData10GET = (
+export const use$todoLists$Limit$10GET = (
   args = {},
   { refetchInterval, handlers = {} } = {}
 ) => {
   const Constants = GlobalVariables.useValues();
   return useQuery(
-    ['Example Data', args],
-    () => exampleData10GET(Constants, args, handlers),
+    ['Lists', args],
+    () => $todoLists$Limit$10GET(Constants, args, handlers),
     {
       refetchInterval,
     }
   );
 };
 
-export const FetchExampleData10GET = ({
+export const Fetch$todoLists$Limit$10GET = ({
   children,
   onData = () => {},
   handlers = {},
@@ -45,7 +45,7 @@ export const FetchExampleData10GET = ({
     data,
     error,
     refetch,
-  } = useExampleData10GET(
+  } = use$todoLists$Limit$10GET(
     {},
     { refetchInterval, handlers: { onData, ...handlers } }
   );
@@ -62,29 +62,34 @@ export const FetchExampleData10GET = ({
       console.error(error);
     }
   }, [error]);
-  return children({ loading, data, error, refetchExampleData10: refetch });
+  return children({
+    loading,
+    data,
+    error,
+    refetch$todoLists$Limit$10: refetch,
+  });
 };
 
-export const foodCategoriesGET = (Constants, _args, handlers = {}) =>
-  fetch(`https://example-data.draftbit.com/food_categories`, {
+export const articlesGET = (Constants, _args, handlers = {}) =>
+  fetch(`https://example-data.draftbit.com/articles?_limit=10`, {
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
   }).then(res => handleResponse(res, handlers));
 
-export const useFoodCategoriesGET = (
+export const useArticlesGET = (
   args = {},
   { refetchInterval, handlers = {} } = {}
 ) => {
   const Constants = GlobalVariables.useValues();
   return useQuery(
-    ['FoodCategories', args],
-    () => foodCategoriesGET(Constants, args, handlers),
+    ['articles', args],
+    () => articlesGET(Constants, args, handlers),
     {
       refetchInterval,
     }
   );
 };
 
-export const FetchFoodCategoriesGET = ({
+export const FetchArticlesGET = ({
   children,
   onData = () => {},
   handlers = {},
@@ -99,7 +104,7 @@ export const FetchFoodCategoriesGET = ({
     data,
     error,
     refetch,
-  } = useFoodCategoriesGET(
+  } = useArticlesGET(
     {},
     { refetchInterval, handlers: { onData, ...handlers } }
   );
@@ -116,84 +121,29 @@ export const FetchFoodCategoriesGET = ({
       console.error(error);
     }
   }, [error]);
-  return children({ loading, data, error, refetchFoodCategories: refetch });
+  return children({ loading, data, error, refetchArticles: refetch });
 };
 
-export const grabDataPointsGET = (Constants, _args, handlers = {}) =>
-  fetch(`https://example-data.draftbit.com/users?_limit=10`, {
+export const peopleGET = (Constants, _args, handlers = {}) =>
+  fetch(`https://example-data.draftbit.com/people?_limit=10`, {
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
   }).then(res => handleResponse(res, handlers));
 
-export const useGrabDataPointsGET = (
+export const usePeopleGET = (
   args = {},
   { refetchInterval, handlers = {} } = {}
 ) => {
   const Constants = GlobalVariables.useValues();
-  return useQuery(
-    ['users', args],
-    () => grabDataPointsGET(Constants, args, handlers),
-    {
-      refetchInterval,
-    }
-  );
-};
-
-export const FetchGrabDataPointsGET = ({
-  children,
-  onData = () => {},
-  handlers = {},
-  refetchInterval,
-}) => {
-  const Constants = GlobalVariables.useValues();
-  const isFocused = useIsFocused();
-  const prevIsFocused = usePrevious(isFocused);
-
-  const {
-    isLoading: loading,
-    data,
-    error,
-    refetch,
-  } = useGrabDataPointsGET(
-    {},
-    { refetchInterval, handlers: { onData, ...handlers } }
-  );
-
-  React.useEffect(() => {
-    if (!prevIsFocused && isFocused) {
-      refetch();
-    }
-  }, [isFocused, prevIsFocused]);
-
-  React.useEffect(() => {
-    if (error) {
-      console.error('Fetch error: ' + error.status + ' ' + error.statusText);
-      console.error(error);
-    }
-  }, [error]);
-  return children({ loading, data, error, refetchGrabDataPoints: refetch });
-};
-
-export const usersGET = (Constants, { limit }, handlers = {}) =>
-  fetch(`https://example-data.draftbit.com/users?_limit=${limit ?? ''}`, {
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-  }).then(res => handleResponse(res, handlers));
-
-export const useUsersGET = (
-  args = {},
-  { refetchInterval, handlers = {} } = {}
-) => {
-  const Constants = GlobalVariables.useValues();
-  return useQuery(['Users', args], () => usersGET(Constants, args, handlers), {
+  return useQuery(['Teams', args], () => peopleGET(Constants, args, handlers), {
     refetchInterval,
   });
 };
 
-export const FetchUsersGET = ({
+export const FetchPeopleGET = ({
   children,
   onData = () => {},
   handlers = {},
   refetchInterval,
-  limit,
 }) => {
   const Constants = GlobalVariables.useValues();
   const isFocused = useIsFocused();
@@ -204,10 +154,7 @@ export const FetchUsersGET = ({
     data,
     error,
     refetch,
-  } = useUsersGET(
-    { limit },
-    { refetchInterval, handlers: { onData, ...handlers } }
-  );
+  } = usePeopleGET({}, { refetchInterval, handlers: { onData, ...handlers } });
 
   React.useEffect(() => {
     if (!prevIsFocused && isFocused) {
@@ -221,5 +168,99 @@ export const FetchUsersGET = ({
       console.error(error);
     }
   }, [error]);
-  return children({ loading, data, error, refetchUsers: refetch });
+  return children({ loading, data, error, refetchPeople: refetch });
+};
+
+export const teamsGET = (Constants, _args, handlers = {}) =>
+  fetch(`https://example-data.draftbit.com/teams?_limit=10`, {
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+  }).then(res => handleResponse(res, handlers));
+
+export const useTeamsGET = (
+  args = {},
+  { refetchInterval, handlers = {} } = {}
+) => {
+  const Constants = GlobalVariables.useValues();
+  return useQuery(['teams', args], () => teamsGET(Constants, args, handlers), {
+    refetchInterval,
+  });
+};
+
+export const FetchTeamsGET = ({
+  children,
+  onData = () => {},
+  handlers = {},
+  refetchInterval,
+}) => {
+  const Constants = GlobalVariables.useValues();
+  const isFocused = useIsFocused();
+  const prevIsFocused = usePrevious(isFocused);
+
+  const {
+    isLoading: loading,
+    data,
+    error,
+    refetch,
+  } = useTeamsGET({}, { refetchInterval, handlers: { onData, ...handlers } });
+
+  React.useEffect(() => {
+    if (!prevIsFocused && isFocused) {
+      refetch();
+    }
+  }, [isFocused, prevIsFocused]);
+
+  React.useEffect(() => {
+    if (error) {
+      console.error('Fetch error: ' + error.status + ' ' + error.statusText);
+      console.error(error);
+    }
+  }, [error]);
+  return children({ loading, data, error, refetchTeams: refetch });
+};
+
+export const todosGET = (Constants, _args, handlers = {}) =>
+  fetch(`https://example-data.draftbit.com/todos?_limit=10`, {
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+  }).then(res => handleResponse(res, handlers));
+
+export const useTodosGET = (
+  args = {},
+  { refetchInterval, handlers = {} } = {}
+) => {
+  const Constants = GlobalVariables.useValues();
+  return useQuery(['todos', args], () => todosGET(Constants, args, handlers), {
+    refetchInterval,
+  });
+};
+
+export const FetchTodosGET = ({
+  children,
+  onData = () => {},
+  handlers = {},
+  refetchInterval,
+}) => {
+  const Constants = GlobalVariables.useValues();
+  const isFocused = useIsFocused();
+  const prevIsFocused = usePrevious(isFocused);
+
+  const {
+    isLoading: loading,
+    data,
+    error,
+    refetch,
+  } = useTodosGET({}, { refetchInterval, handlers: { onData, ...handlers } });
+
+  React.useEffect(() => {
+    if (!prevIsFocused && isFocused) {
+      refetch();
+    }
+  }, [isFocused, prevIsFocused]);
+
+  React.useEffect(() => {
+    if (error) {
+      console.error('Fetch error: ' + error.status + ' ' + error.statusText);
+      console.error(error);
+    }
+  }, [error]);
+  return children({ loading, data, error, refetchTodos: refetch });
 };

@@ -17,6 +17,7 @@ const DeviceVariables = {
   cantidadProyetos: ' ',
   cantidadQuotes: ' ',
   cantidadServices: ' ',
+  cellphone: ' ',
   cityContact: ' ',
   contact_name: ' ',
   diferenciaValor: ' ',
@@ -68,6 +69,7 @@ const AppVariables = {
   token: '',
   totalAcumulado: 0,
   totalArea: 0,
+  totalServices: 0,
 };
 const GlobalVariableContext = React.createContext();
 const GlobalVariableUpdater = React.createContext();

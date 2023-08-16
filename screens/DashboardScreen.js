@@ -38,13 +38,15 @@ const DashboardScreen = props => {
         if (!isFocused) {
           return;
         }
-        const result_project = (await SupaBase2Api.manyprojecstGET(Constants))
-          ?.json;
+        const result_project = (
+          await SupaBase2Api.manyprojecstGET(Constants, { tnt: 80 })
+        )?.json;
         const result_contact = (await SupaBase2Api.contactGET(Constants))?.json;
         const result_quote = (await SupaBase2Api.manyQuotesGET(Constants))
           ?.json;
-        const result_services = (await SupaBase2Api.servicesGET(Constants))
-          ?.json;
+        const result_services = (
+          await SupaBase2Api.servicesGET(Constants, { tnt: 80 })
+        )?.json;
         const proyectos = cantidadElementos(result_project);
         const contact = cantidadElementos(result_contact);
         const services = cantidadElementos(result_services);

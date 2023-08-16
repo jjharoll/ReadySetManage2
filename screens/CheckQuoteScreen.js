@@ -682,7 +682,7 @@ const CheckQuoteScreen = props => {
                   dimensions.width
                 )}
                 resizeMode={'contain'}
-                source={Images.CheckoutCustomIcons3}
+                source={Images.NewCard}
               />
               {/* Option 2 */}
               <Text
@@ -728,7 +728,7 @@ const CheckQuoteScreen = props => {
                   dimensions.width
                 )}
                 resizeMode={'contain'}
-                source={Images.CheckoutCustomIcons1}
+                source={Images.Paypal}
               />
               {/* Option 2 */}
               <Text
@@ -960,7 +960,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {0}
+              {Constants['totalArea']}
             </Text>
           </View>
 
@@ -1105,7 +1105,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {Constants['totalServices']}
             </Text>
           </View>
 
@@ -1133,7 +1133,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {Constants['totalServices']}
             </Text>
           </View>
 
@@ -1161,7 +1161,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {0}
             </Text>
           </View>
 
@@ -1189,7 +1189,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {0}
             </Text>
           </View>
         </View>
@@ -1250,7 +1250,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {0}
             </Text>
           </View>
 
@@ -1278,7 +1278,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {0}
             </Text>
           </View>
 
@@ -1306,7 +1306,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {0}
             </Text>
           </View>
 
@@ -1334,7 +1334,7 @@ const CheckQuoteScreen = props => {
                 dimensions.width
               )}
             >
-              {'$3975'}
+              {0}
             </Text>
           </View>
         </View>

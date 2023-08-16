@@ -25,7 +25,7 @@ import {
 } from 'react-native';
 import { Fetch } from 'react-request';
 
-const HomepageScreen = props => {
+const HomepageCopyScreen = props => {
   const dimensions = useWindowDimensions();
   const Constants = GlobalVariables.useValues();
   const Variables = Constants;
@@ -56,14 +56,7 @@ const HomepageScreen = props => {
   const [showNav, setShowNav] = React.useState(false);
 
   return (
-    <ScreenContainer
-      style={StyleSheet.applyWidth(
-        { justifyContent: 'flex-start' },
-        dimensions.width
-      )}
-      hasSafeArea={true}
-      scrollable={true}
-    >
+    <ScreenContainer hasSafeArea={true} scrollable={true}>
       {/* Drawer */}
       <>
         {!showNav ? null : (
@@ -1182,4 +1175,4 @@ const HomepageScreen = props => {
   );
 };
 
-export default withTheme(HomepageScreen);
+export default withTheme(HomepageCopyScreen);

@@ -10,7 +10,6 @@ import {
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
-  Octicons,
   SimpleLineIcons,
 } from '@expo/vector-icons';
 
@@ -41,7 +40,6 @@ export default function cacheAssetsAsync() {
     Ionicons.font,
     MaterialCommunityIcons.font,
     MaterialIcons.font,
-    Octicons.font,
     SimpleLineIcons.font,
   ]);
 

@@ -1944,11 +1944,11 @@ const Newquotes2Screen = props => {
                   try {
                     const result = multiplicar(height, width);
                     setSubAreas(result);
-                    const suma = incrementarValor(
-                      Constants['totalArea'],
-                      result
-                    );
-                    console.log('dumssssss', Constants['totalArea']);
+                    setGlobalVariableValue({
+                      key: 'totalArea',
+                      value: incrementarValor(Constants['totalArea'], result),
+                    });
+                    console.log(Constants['totalArea']);
                   } catch (err) {
                     console.error(err);
                   }
@@ -2677,8 +2677,8 @@ const Newquotes2Screen = props => {
           {'Select job type'}
         </Text>
 
-        <SupaBase2Api.FetchCollectionNAme2GET>
-          {({ loading, error, data, refetchCollectionNAme2 }) => {
+        <SupaBase2Api.FetchPruebasJobTypeGET>
+          {({ loading, error, data, refetchPruebasJobType }) => {
             const fetchData = data?.json;
             if (loading) {
               return <ActivityIndicator />;
@@ -2736,7 +2736,7 @@ const Newquotes2Screen = props => {
               />
             );
           }}
-        </SupaBase2Api.FetchCollectionNAme2GET>
+        </SupaBase2Api.FetchPruebasJobTypeGET>
       </Modal>
       {/* modalNewAreas */}
       <>

@@ -14,12 +14,11 @@ import BlankScreen from './screens/BlankScreen';
 import CheckQuoteScreen from './screens/CheckQuoteScreen';
 import Contact2Screen from './screens/Contact2Screen';
 import DashboardScreen from './screens/DashboardScreen';
+import HomepageCopyScreen from './screens/HomepageCopyScreen';
 import HomepageScreen from './screens/HomepageScreen';
 import LoginScreen from './screens/LoginScreen';
-import MenumainScreen from './screens/MenumainScreen';
 import NewcontactScreen from './screens/NewcontactScreen';
 import NewprojecScreen from './screens/NewprojecScreen';
-import Newquotes2CopyScreen from './screens/Newquotes2CopyScreen';
 import Newquotes2Screen from './screens/Newquotes2Screen';
 import NotificationSettingsScreen from './screens/NotificationSettingsScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
@@ -97,13 +96,6 @@ export default function RootAppNavigator() {
           component={LoginScreen}
           options={{
             title: 'Login',
-          }}
-        />
-        <Stack.Screen
-          name="MenumainScreen"
-          component={MenumainScreen}
-          options={{
-            title: 'menu_main',
           }}
         />
         <Stack.Screen
@@ -269,10 +261,10 @@ export default function RootAppNavigator() {
           }}
         />
         <Stack.Screen
-          name="Newquotes2CopyScreen"
-          component={Newquotes2CopyScreen}
+          name="HomepageCopyScreen"
+          component={HomepageCopyScreen}
           options={{
-            title: 'new quotes2 Copy',
+            title: 'Homepage Copy',
           }}
         />
       </Stack.Navigator>

@@ -29,10 +29,6 @@ const queryClient = new QueryClient();
 const App = () => {
   const [isReady, setIsReady] = React.useState(false);
   const [fontsLoaded] = useFonts({
-    AbrilFatface_400Regular:
-      'https://fonts.gstatic.com/s/abrilfatface/v19/zOL64pLDlL1D99S8g8PtiKchm-BsjOLhZBY.ttf',
-    Anton_400Regular:
-      'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm0K08i4gS7lu.ttf',
     Cantarell_400Regular:
       'https://fonts.gstatic.com/s/cantarell/v17/B50NF7ZDq37KMUvlO01Ji6hqHK-CLA.ttf',
     Inter_300Light:
